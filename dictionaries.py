@@ -109,19 +109,24 @@ def get_sum_zero_pairs(numbers):
 
     
     nums = set(numbers)
-    pos_nums = []
-    for num in nums:
-        pos_nums.append(abs(num))
+    pairs =[]
+    # pos_nums = []
+    # for num in nums:
+    #     pos_nums.append(abs(num))
 
-    pairs = []
-    for num in pos_nums:
-        if num == 0:
-            pair = [0, 0]
+    # pairs = []
+    # for num in pos_nums:
+    #     if num == 0:
+    #         pair = [0, 0]
 
-        elif pos_nums.count(num) > 1:
-            pair = [num, -num]
+    #     elif pos_nums.count(num) > 1:
+    #         pair = [num, -num]
             
-        if pair not in pairs:    
+    #     if pair not in pairs:    
+    #         pairs.append(pair)
+    for num in nums:
+        if num >= 0 and -num in nums:
+            pair = [num, -num]
             pairs.append(pair)
 
     return pairs
@@ -151,8 +156,22 @@ def top_chars(phrase):
     Do not count spaces, but count all other characters.
 
     """
+    
+    no_sp = phrase.replace(' ', '')
+    l_cnts = {}
+    for let in no_sp:
+        l_cnts[let] = l_cnts.get(let, 0) + 1
 
-    return []
+    max_val = max(l_cnts.values())
+
+    max_keys = []
+    
+    for key, val in l_cnts.items():
+        if val == max_val:
+            max_keys.append(key)
+
+
+    return sorted(max_keys)
 
 #####################################################################
 # You can ignore everything below this.
